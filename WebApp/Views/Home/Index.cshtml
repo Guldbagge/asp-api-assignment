@@ -1,0 +1,14 @@
+﻿@using Infrastructure.Entities
+@model IEnumerable<CourseEntity>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@foreach (var course in Model)
+{
+    <div>
+        <h2>@course.Title</h2>
+        <p></p>
+    </div>
+}
