@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             if (subscriber != null)
             {
                 return Ok(subscriber);
-            }                                                         //move              
+            }                                                                 
 
             return NotFound();
         }

@@ -28,10 +28,8 @@ public class SubscribersController : Controller
             {
                 viewModel.IsSubscribed = true;
             }
-
         }
 
         return View(viewModel);
     }
-
 }
