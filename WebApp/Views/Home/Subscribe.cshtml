@@ -1,11 +1,11 @@
 ﻿@using Infrastructure.Entities
 @model SubscriberEntity
 
-@{
+@* @{
     ViewData["Title"] = "Subscribe";
 }
 
-@if (ViewData["Subscribed"] != null && bool.TryParse(ViewData["Subscribed"].ToString(), out bool subscribed) && subscribed)
+@if (bool.Parse(ViewData["Subscribed"]!.ToString()!))
 {
     <div>Thank you for subscribing!</div>
 }
@@ -13,4 +13,4 @@
 <form asp-action="Subscribe" asp-controller="Home" method="post">
     <input asp-for="@Model.Email" />
     <button type="submit">Subscribe</button>
-</form>
+</form> *@

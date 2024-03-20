@@ -3,6 +3,8 @@ using Infrastructure.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Dtos;
+using WebApi.Models;
 
 namespace WebApi.Controllers
 {
@@ -31,26 +33,28 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOne(CourseEntity model)
+        public async Task<IActionResult> CreateOne(CourseRegistrationForm form)
         {
             if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Courses.Add(model);
-                    await _context.SaveChangesAsync();
+            {   
+                    var courseEntity = new CourseEntity
+                    {
+                        Title = form.Title,
+                        Price = form.Price,
+                        DiscountPrice = form.DiscountPrice,
+                        Hours = form.Hours,
+                        IsBestseller = form.IsBestseller,
+                        LikesInNumbers = form.LikesInNumbers,
+                        LikesInProcent = form.LikesInProcent,
+                        Author = form.Author,
+                        ImageUrl = form.ImageUrl
+                    };
+                _context.Courses.Add(courseEntity);
+                await _context.SaveChangesAsync();
 
-                    return Created("", model);
-                }
-
-                catch
-                {
-                    return Problem("Unable to create course.");
-                }
+                return Created("",(Course) courseEntity);
             }
-
             return BadRequest();
         }
-
     }
 }

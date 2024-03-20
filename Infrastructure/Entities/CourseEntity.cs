@@ -12,4 +12,5 @@ public class CourseEntity
     public string? LikesInProcent { get; set; }
     public string? Author { get; set; }
     public string? ImageUrl { get; set; } = null!;
+
 }
