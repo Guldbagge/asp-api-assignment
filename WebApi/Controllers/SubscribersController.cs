@@ -3,17 +3,20 @@ using Infrastructure.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class SubscribersController(DataContext context) : ControllerBase
     {
         private readonly DataContext _context = context;
 
         #region CREATE
         [HttpPost]
+        [UseApiKey]
         public async Task<IActionResult> Create(string email, bool isSubscribed, bool newsletterCheckbox1, bool newsletterCheckbox2, bool newsletterCheckbox3, bool newsletterCheckbox4, bool newsletterCheckbox5, bool newsletterCheckbox6)
         {
             if (!string.IsNullOrEmpty(email))

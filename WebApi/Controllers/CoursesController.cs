@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Dtos;
+using WebApi.Filters;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -15,6 +16,7 @@ namespace WebApi.Controllers
         private readonly DataContext _context = context;
 
         [HttpGet]
+        [UseApiKey]
 
         public async Task<IActionResult> GetAll() => Ok(await _context.Courses.ToListAsync());
 
