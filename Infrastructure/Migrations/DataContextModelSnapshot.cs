@@ -74,6 +74,27 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsSubscribed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox1")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox2")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox3")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox4")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox6")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Subscribers");
