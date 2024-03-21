@@ -8,19 +8,19 @@ public class CourseRegistrationFormViewModel
     [Display(Name ="Title")]
     public string Title { get; set; } = null!;
     [Display(Name ="Price")]
-    public string? Price { get; set; }
+    public decimal Price { get; set; }
     [Display(Name ="Discount Price")]
-    public string? DiscountPrice { get; set; }
+    public decimal DiscountPrice { get; set; }
     [Display(Name ="Hours")]
-    public string? Hours { get; set; }
+    public int Hours { get; set; }
     [Display(Name ="Is Bestseller")]
     public bool IsBestseller = false;
     [Display(Name ="Likes In Numbers")]
-    public string? LikesInNumbers { get; set; }
+    public decimal LikesInNumbers { get; set; }
     [Display(Name ="Likes In Procent")]
-    public string? LikesInProcent { get; set; }
+    public decimal LikesInProcent { get; set; }
     [Display(Name ="Author")]
     public string? Author { get; set; }
     [Display(Name ="Image Url")]
-    public string? ImageUrl { get; set; }
+    public string? ImageName { get; set; }
 }
