@@ -47,7 +47,7 @@ namespace WebApi.Controllers
                         LikesInNumbers = form.LikesInNumbers,
                         LikesInProcent = form.LikesInProcent,
                         Author = form.Author,
-                        ImageUrl = form.ImageUrl
+                        ImageName = form.ImageName
                     };
                 _context.Courses.Add(courseEntity);
                 await _context.SaveChangesAsync();

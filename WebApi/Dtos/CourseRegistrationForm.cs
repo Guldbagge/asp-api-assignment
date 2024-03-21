@@ -7,12 +7,12 @@ public class CourseRegistrationForm
 
     [Required]
     public string Title { get; set; } = null!;
-    public string? Price { get; set; }
-    public string? DiscountPrice { get; set; }
-    public string? Hours { get; set; }
+    public decimal Price { get; set; }
+    public decimal DiscountPrice { get; set; }
+    public int Hours { get; set; }
     public bool IsBestseller = false;
-    public string? LikesInNumbers { get; set; }
-    public string? LikesInProcent { get; set; }
+    public decimal LikesInNumbers { get; set; }
+    public decimal LikesInProcent { get; set; }
     public string? Author { get; set; }
-    public string? ImageUrl { get; set; }
+    public string? ImageName { get; set; }
 }

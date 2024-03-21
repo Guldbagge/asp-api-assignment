@@ -32,26 +32,26 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DiscountPrice")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("DiscountPrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Hours")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Hours")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBestseller")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LikesInNumbers")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("LikesInNumbers")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("LikesInProcent")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("LikesInProcent")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Price")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -73,6 +73,27 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsSubscribed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox1")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox2")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox3")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox4")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NewsletterCheckbox6")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

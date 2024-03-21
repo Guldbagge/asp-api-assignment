@@ -14,33 +14,70 @@ namespace WebApi.Controllers
 
         #region CREATE
         [HttpPost]
-        public async Task <IActionResult> Create(string email)
+        public async Task<IActionResult> Create(string email, bool isSubscribed, bool newsletterCheckbox1, bool newsletterCheckbox2, bool newsletterCheckbox3, bool newsletterCheckbox4, bool newsletterCheckbox5, bool newsletterCheckbox6)
         {
             if (!string.IsNullOrEmpty(email))
             {
-                if (!await _context.Subscribers.AnyAsync(x => x.Email == email)) //move to service repository
+                if (!await _context.Subscribers.AnyAsync(x => x.Email == email))
                 {
                     try
                     {
-                        var subscriberEntity = new SubscriberEntity { Email = email };
+                        var subscriberEntity = new SubscriberEntity
+                        {
+                            Email = email,
+                            IsSubscribed = isSubscribed,
+                            NewsletterCheckbox1 = newsletterCheckbox1,
+                            NewsletterCheckbox2 = newsletterCheckbox2,
+                            NewsletterCheckbox3 = newsletterCheckbox3,
+                            NewsletterCheckbox4 = newsletterCheckbox4,
+                            NewsletterCheckbox5 = newsletterCheckbox5,
+                            NewsletterCheckbox6 = newsletterCheckbox6
+                        };
                         _context.Subscribers.Add(subscriberEntity);
                         await _context.SaveChangesAsync();
 
                         return Created("", null);
                     }
-
-                    catch 
-                    { 
+                    catch
+                    {
                         return Problem("Unable to create subscription.");
-
                     }
-                }                                                               //move to service repository
-
+                }
                 return Conflict("Email already exists.");
-               
             }
             return BadRequest();
         }
+
+
+
+        //[HttpPost]
+        //public async Task <IActionResult> Create(string email)
+        //{
+        //    if (!string.IsNullOrEmpty(email))
+        //    {
+        //        if (!await _context.Subscribers.AnyAsync(x => x.Email == email)) //move to service repository
+        //        {
+        //            try
+        //            {
+        //                var subscriberEntity = new SubscriberEntity { Email = email };
+        //                _context.Subscribers.Add(subscriberEntity);
+        //                await _context.SaveChangesAsync();
+
+        //                return Created("", null);
+        //            }
+
+        //            catch 
+        //            { 
+        //                return Problem("Unable to create subscription.");
+
+        //            }
+        //        }                                                               //move to service repository
+
+        //        return Conflict("Email already exists.");
+
+        //    }
+        //    return BadRequest();
+        //}
 
         #endregion
 
