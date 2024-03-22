@@ -51,37 +51,6 @@ namespace WebApi.Controllers
             return BadRequest();
         }
 
-
-
-        //[HttpPost]
-        //public async Task <IActionResult> Create(string email)
-        //{
-        //    if (!string.IsNullOrEmpty(email))
-        //    {
-        //        if (!await _context.Subscribers.AnyAsync(x => x.Email == email)) //move to service repository
-        //        {
-        //            try
-        //            {
-        //                var subscriberEntity = new SubscriberEntity { Email = email };
-        //                _context.Subscribers.Add(subscriberEntity);
-        //                await _context.SaveChangesAsync();
-
-        //                return Created("", null);
-        //            }
-
-        //            catch 
-        //            { 
-        //                return Problem("Unable to create subscription.");
-
-        //            }
-        //        }                                                               //move to service repository
-
-        //        return Conflict("Email already exists.");
-
-        //    }
-        //    return BadRequest();
-        //}
-
         #endregion
 
 
@@ -134,20 +103,35 @@ namespace WebApi.Controllers
         #endregion
 
         #region DELETE
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOne(int id)
+        [HttpDelete("{email}")]
+        public async Task<IActionResult> DeleteOne(string email)
         {
-            var subscribers = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == id);
-            if (subscribers != null)
+            var subscriber = await _context.Subscribers.FirstOrDefaultAsync(x => x.Email == email);
+            if (subscriber != null)
             {
-                _context.Subscribers.Remove(subscribers);
+                _context.Subscribers.Remove(subscriber);
                 await _context.SaveChangesAsync();
-                
+
                 return Ok();
             }
 
             return NotFound();
         }
+
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteOne(int id)
+        //{
+        //    var subscribers = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == id);
+        //    if (subscribers != null)
+        //    {
+        //        _context.Subscribers.Remove(subscribers);
+        //        await _context.SaveChangesAsync();
+
+        //        return Ok();
+        //    }
+
+        //    return NotFound();
+        //}
 
         #endregion
 
