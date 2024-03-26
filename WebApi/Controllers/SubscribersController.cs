@@ -3,17 +3,20 @@ using Infrastructure.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class SubscribersController(DataContext context) : ControllerBase
     {
         private readonly DataContext _context = context;
 
         #region CREATE
         [HttpPost]
+        [UseApiKey]
         public async Task<IActionResult> Create(string email, bool isSubscribed, bool newsletterCheckbox1, bool newsletterCheckbox2, bool newsletterCheckbox3, bool newsletterCheckbox4, bool newsletterCheckbox5, bool newsletterCheckbox6)
         {
             if (!string.IsNullOrEmpty(email))
@@ -47,37 +50,6 @@ namespace WebApi.Controllers
             }
             return BadRequest();
         }
-
-
-
-        //[HttpPost]
-        //public async Task <IActionResult> Create(string email)
-        //{
-        //    if (!string.IsNullOrEmpty(email))
-        //    {
-        //        if (!await _context.Subscribers.AnyAsync(x => x.Email == email)) //move to service repository
-        //        {
-        //            try
-        //            {
-        //                var subscriberEntity = new SubscriberEntity { Email = email };
-        //                _context.Subscribers.Add(subscriberEntity);
-        //                await _context.SaveChangesAsync();
-
-        //                return Created("", null);
-        //            }
-
-        //            catch 
-        //            { 
-        //                return Problem("Unable to create subscription.");
-
-        //            }
-        //        }                                                               //move to service repository
-
-        //        return Conflict("Email already exists.");
-
-        //    }
-        //    return BadRequest();
-        //}
 
         #endregion
 
@@ -131,20 +103,35 @@ namespace WebApi.Controllers
         #endregion
 
         #region DELETE
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOne(int id)
+        [HttpDelete("{email}")]
+        public async Task<IActionResult> DeleteOne(string email)
         {
-            var subscribers = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == id);
-            if (subscribers != null)
+            var subscriber = await _context.Subscribers.FirstOrDefaultAsync(x => x.Email == email);
+            if (subscriber != null)
             {
-                _context.Subscribers.Remove(subscribers);
+                _context.Subscribers.Remove(subscriber);
                 await _context.SaveChangesAsync();
-                
+
                 return Ok();
             }
 
             return NotFound();
         }
+
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteOne(int id)
+        //{
+        //    var subscribers = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == id);
+        //    if (subscribers != null)
+        //    {
+        //        _context.Subscribers.Remove(subscribers);
+        //        await _context.SaveChangesAsync();
+
+        //        return Ok();
+        //    }
+
+        //    return NotFound();
+        //}
 
         #endregion
 
