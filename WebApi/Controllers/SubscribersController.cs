@@ -103,8 +103,9 @@ namespace WebApi.Controllers
         #endregion
 
         #region DELETE
-        [HttpDelete("{email}")]
-        public async Task<IActionResult> DeleteOne(string email)
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteOne([FromQuery] string email)
         {
             var subscriber = await _context.Subscribers.FirstOrDefaultAsync(x => x.Email == email);
             if (subscriber != null)
@@ -112,26 +113,11 @@ namespace WebApi.Controllers
                 _context.Subscribers.Remove(subscriber);
                 await _context.SaveChangesAsync();
 
-                return Ok();
+                return Ok($"Subscriber with email '{email}' has been successfully deleted.");
             }
 
-            return NotFound();
+            return NotFound($"Subscriber with email '{email}' not found.");
         }
-
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteOne(int id)
-        //{
-        //    var subscribers = await _context.Subscribers.FirstOrDefaultAsync(x => x.Id == id);
-        //    if (subscribers != null)
-        //    {
-        //        _context.Subscribers.Remove(subscribers);
-        //        await _context.SaveChangesAsync();
-
-        //        return Ok();
-        //    }
-
-        //    return NotFound();
-        //}
 
         #endregion
 
